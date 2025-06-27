@@ -32,5 +32,5 @@ Aplikasi ini memungkinkan pengguna untuk mendaftar, login, mencari film, melihat
     -   Username: `momo`
     -   Password: `(masukkan password Anda di sini)`
 -   **User Biasa:**
-    -   Username: `bagus`
+    -   Username: `macha`
     -   Password: `(masukkan password Anda di sini)`
