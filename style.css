@@ -1,0 +1,603 @@
+/* =================================================================
+  STYLESHEET FINAL & LENGKAP - Proyek Katalog Film
+   ================================================================= */
+
+/* 1. VARIABEL GLOBAL & FONT */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --bg-color-darkest: #0a192f;
+  --bg-color-dark: #1a2e4e;
+  --primary-accent: #4a90e2;
+  --primary-accent-hover: #1da1f2;
+  --text-primary: #e0e0e0;
+  --text-secondary: #b0b0b0;
+  --border-color: #2a4060;
+  --rating-color: #ffd700;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --netflix-red: #e50914;
+}
+
+/* 2. RESET & GAYA DASAR */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: var(--bg-color-darkest);
+  color: var(--text-primary);
+  font-family: "Poppins", sans-serif;
+}
+a {
+  color: var(--primary-accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--primary-accent-hover);
+}
+
+/* 3. NAVBAR */
+.navbar {
+  background-color: var(--bg-color-dark);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+.nav-link {
+  font-weight: 500;
+  margin: 0 1rem;
+}
+.navbar-dark .nav-link,
+.navbar-dark .navbar-brand {
+  color: var(--text-primary) !important;
+}
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link.active {
+  color: #fff !important;
+}
+
+@media (min-width: 992px) {
+  .navbar .container-fluid {
+    position: relative;
+  }
+  .navbar-nav.mx-auto {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .navbar-nav.ms-auto {
+    position: absolute;
+    right: 1rem;
+  }
+}
+
+/* 4. MOVIE CARD (Untuk Halaman Utama & Hasil Pencarian) */
+.section-title {
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 25px;
+}
+.movie-card {
+  background-color: var(--bg-color-dark);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--text-primary);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2);
+  border-color: var(--primary-accent);
+}
+.movie-card img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+}
+.movie-card-body {
+  padding: 1rem;
+}
+.movie-card-title {
+  font-weight: 600;
+  font-size: 1em;
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.movie-card-meta {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+.rating {
+  color: var(
+    --rating-color
+  ) !important; /* Diberi !important untuk memastikan aturan ini menang */
+  font-weight: bold;
+}
+
+/* 5. AUTH PAGES (Login & Register) */
+.auth-container {
+  max-width: 450px;
+  margin: 5rem auto;
+  padding: 2.5rem;
+  background-color: var(--bg-color-dark);
+  border-radius: 12px;
+}
+.auth-container h2 {
+  font-weight: 600;
+}
+.auth-container .form-control {
+  background-color: var(--bg-color-darkest);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+}
+.auth-container .form-control:focus {
+  border-color: var(--primary-accent);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+/* 6. PROFILE PAGE (REFINED & PROFESSIONAL) */
+.profile-card {
+  background-color: var(--bg-color-dark);
+  border-radius: 12px;
+  padding: 30px;
+  border: 1px solid var(--border-color);
+  max-width: 700px;
+  margin: 2rem auto;
+}
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 25px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-accent);
+  margin-right: 25px;
+}
+.profile-username {
+  font-size: 2.2em;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+/* PERBAIKAN: Membuat badge role lebih besar dan jelas */
+.role-badge {
+  background-color: var(--primary-accent);
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 6px 15px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.profile-info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 5px;
+  font-size: 1.1em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.profile-info-item:last-child {
+  border-bottom: none;
+}
+.profile-info-item .label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.profile-info-item .value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+/* PERBAIKAN: Memastikan tombol admin di tengah */
+.profile-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+}
+
+/* Gaya untuk Tab di halaman profil */
+.profile-tabs .nav-tabs {
+  border-bottom: 2px solid var(--border-color);
+}
+.profile-tabs .nav-tabs .nav-link {
+  background-color: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+.profile-tabs .nav-tabs .nav-link.active,
+.profile-tabs .nav-tabs .nav-link:hover {
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--primary-accent);
+}
+
+/* 7. ADMIN PANEL STYLES */
+.admin-container {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.admin-title-page {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 2.2rem;
+}
+.admin-table-container {
+  background-color: var(--bg-color-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1.5rem;
+}
+.admin-table-container .table {
+  --bs-table-bg: var(--bg-color-dark);
+  --bs-table-color: var(--text-primary);
+  --bs-table-border-color: var(--border-color);
+  --bs-table-hover-bg: #2a3b50;
+}
+.professional-table {
+  --bs-table-bg: var(--bg-color-dark);
+  --bs-table-color: var(--text-primary);
+  --bs-table-border-color: var(--border-color);
+  --bs-table-hover-bg: #2a3b50;
+  vertical-align: middle;
+}
+.professional-table thead th {
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  border-bottom-width: 2px !important;
+}
+
+/* 8. REPORT PAGE STYLING */
+.report-filters {
+  background-color: var(--bg-color-dark);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 2.5rem;
+}
+.report-filters .form-label {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+}
+.report-results {
+  background-color: var(--bg-color-dark);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+.report-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* 9. SEARCH PAGE */
+.search-form-container {
+  background-color: var(--bg-color-dark);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+.search-form-container .form-label {
+  font-size: 0.85em;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+.search-form-container .form-control::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* ==============================================
+  10. DETAIL PAGE STYLING (YANG BARU & DIPERBAIKI)
+   ============================================== */
+.film-detail-poster {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.film-detail-info h1 {
+  font-weight: 700;
+}
+
+.film-detail-meta {
+  color: var(--text-secondary);
+  font-size: 1.1em;
+  margin-bottom: 1rem;
+}
+
+/* PERBAIKAN: Membuat bintang rating berwarna */
+.film-detail-meta .rating,
+.movie-card-meta .rating {
+  color: var(--rating-color);
+  font-weight: bold;
+}
+
+.film-detail-meta span {
+  display: inline-flex;
+  align-items: center;
+}
+
+.film-detail-description {
+  font-size: 1.1em;
+  line-height: 1.7;
+}
+
+.film-genres .badge {
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+.action-buttons-container {
+  border-top: 1px solid var(--border-color);
+}
+
+.btn-action {
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-action:hover {
+  border-color: var(--primary-accent);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* Gaya untuk tombol yang aktif */
+.btn-action.active {
+  background-color: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-action.favorited {
+  background-color: var(--netflix-red);
+  border-color: var(--netflix-red);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ==============================================
+  STYLE TAMBAHAN UNTUK HALAMAN DETAIL FILM
+   ============================================== */
+
+/* 1. Memberi warna kuning pada bintang rating */
+.film-detail-meta .rating {
+  color: var(--rating-color); /* Menggunakan variabel warna kuning */
+  font-weight: bold;
+}
+
+/* 2. Memberi warna biru pada badge genre */
+.film-genres .badge {
+  background-color: var(--primary-accent) !important; /* Memaksa warna biru */
+  border: 1px solid var(--primary-accent) !important;
+  font-weight: 500;
+}
+
+/* ==============================================
+  PERBAIKAN UNTUK TEKS DROPDOWN DI HALAMAN DETAIL
+   ============================================== */
+
+/* Targetkan elemen <option> di dalam dropdown status tontonan */
+select.btn-action option {
+  background-color: #fff; /* Pastikan latar belakang pilihan tetap terang */
+  color: #000; /* Beri warna teks hitam agar terbaca jelas */
+}
+
+/* ==============================================
+  18. ADMIN DASHBOARD CARDS
+   ============================================== */
+
+.dashboard-card {
+  background-color: var(--bg-color-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  height: 100%;
+  position: relative; /* Diperlukan untuk stretched-link */
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(74, 144, 226, 0.15);
+  border-color: var(--primary-accent);
+}
+
+.dashboard-card .card-icon {
+  font-size: 2.5rem;
+  color: var(--primary-accent);
+  margin-bottom: 1rem;
+}
+
+.dashboard-card .card-title {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.dashboard-card .card-text {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+/* ==============================================
+  CSS UNTUK NAVBAR ADMIN TENGAH SEMPURNA
+   ============================================== */
+
+@media (min-width: 992px) {
+  .navbar .container-fluid {
+    position: relative;
+  }
+
+  /* Targetkan menu utama yang di tengah */
+  .navbar-nav.mx-auto {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Menu pengguna di kanan */
+  .navbar-nav.ms-auto {
+    position: absolute;
+    right: 1rem;
+  }
+}
+
+/* 19. ADMIN USER MANAGEMENT PAGE */
+
+/* Menata form di dalam tabel agar ringkas dan rapi */
+.role-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; /* Jarak antara dropdown dan tombol simpan */
+  min-width: 180px; /* Memberi lebar minimal agar tidak terlalu sempit */
+}
+
+.role-form .form-select-sm {
+  /* Mengatur agar dropdown tidak terlalu memakan tempat */
+  flex-grow: 1;
+}
+
+.role-form .btn-sm {
+  /* Mengatur agar tombol simpan tidak memakan banyak tempat */
+  flex-shrink: 0;
+}
+
+/* GAYA NAVBAR YANG SUDAH DISEMPURNAKAN */
+.navbar {
+  background-color: var(--bg-color-dark);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 0.75rem 1.5rem;
+}
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5em;
+}
+.nav-link {
+  font-weight: 500;
+  margin: 0 1rem; /* Menambah jarak antar link */
+}
+.navbar-dark .nav-link,
+.navbar-dark .navbar-brand {
+  color: var(--text-primary) !important;
+}
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link.active {
+  color: #fff !important;
+}
+
+/* ==============================================
+  CSS FINAL UNTUK NAVBAR TENGAH & KANAN PRESISI
+   ============================================== */
+
+@media (min-width: 992px) {
+  .navbar .container-fluid {
+    position: relative;
+    /* Hapus padding bawaan agar kita bisa kontrol manual */
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navbar-nav.mx-auto {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .navbar-nav.ms-auto {
+    position: absolute;
+    right: 0; /* Paksa menempel di ujung paling kanan */
+  }
+}
+
+/* ==============================================
+  CSS UNTUK POSISI SAPAAN ADMIN DI NAVBAR
+   ============================================== */
+
+.navbar-greeting {
+  font-size: 0.8rem; /* Ukuran font lebih kecil */
+  color: var(--text-secondary); /* Warna abu-abu */
+  padding-left: 40px; /* Sejajarkan dengan ikon di atasnya */
+  margin-top: -8px; /* Tarik sedikit ke atas agar lebih rapat */
+}
+
+/* Sembunyikan sapaan di tampilan mobile agar tidak berantakan */
+@media (max-width: 991px) {
+  .navbar-greeting {
+    display: none;
+  }
+}
+
+/* ==============================================
+  20. ANIMASI & EFEK INTERAKTIF
+   ============================================== */
+
+/* Efek untuk Tombol Utama (seperti + Tambah Film Baru) */
+.btn-primary {
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05); /* Sedikit membesar saat hover */
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+}
+
+/* Efek untuk Baris Tabel di Halaman Admin */
+.professional-table tbody tr,
+.admin-table-container tbody tr {
+  transition: all 0.2s ease-in-out;
+}
+
+.professional-table tbody tr:hover,
+.admin-table-container tbody tr:hover {
+  transform: translateY(-4px); /* Sedikit terangkat saat hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  background-color: #2a3b50; /* Warna hover yang sudah ada */
+}
+
+/* Efek untuk Tombol Aksi di dalam tabel */
+.action-buttons .btn {
+  transition: all 0.2s ease-in-out;
+}
+
+.action-buttons .btn:hover {
+  transform: scale(1.1); /* Tombol ikon sedikit membesar */
+}
