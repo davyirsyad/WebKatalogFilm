@@ -704,9 +704,6 @@ select.btn-action option {
 }
 
 /* Sembunyikan tombol cetak di halaman cetak itu sendiri (saat dicapture html2pdf) */
-.print-button-container {
-  display: none !important; /* Penting agar tidak ikut tercetak/terunduh */
-}
 
 /* =================================================================
   24. STYLE UNTUK KONTEN CETAK/PDF (print_report.php)
@@ -778,9 +775,4 @@ body.print-only {
 
 .report-print-content .table-print tbody tr:nth-child(even) {
   background-color: #f5f5f5; /* Alternating row color di PDF */
-}
-
-/* Sembunyikan tombol cetak di halaman print_report.php itu sendiri */
-.print-button-container {
-  display: none !important; /* Penting agar tidak ikut tercetak/terunduh */
 }

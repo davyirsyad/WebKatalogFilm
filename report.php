@@ -163,25 +163,6 @@ $conn->close(); // Tutup koneksi database setelah mengambil data
             <div class="report-results mt-5">
                 <h2 class="report-title"><?php echo htmlspecialchars($report_title); ?></h2>
                 
-                <div class="text-end mb-3">
-                    <?php
-                    // Bangun URL untuk print_report.php, sertakan semua filter yang relevan
-                    $print_link = "print_report.php?type=" . urlencode($report_type);
-                    if (!empty($tahun_produksi_filter)) {
-                        $print_link .= "&tahun_produksi=" . urlencode($tahun_produksi_filter);
-                    }
-                    if (!empty($genre_filter)) {
-                        $print_link .= "&genre=" . urlencode($genre_filter);
-                    }
-                    if (!empty($min_users_filter)) {
-                        $print_link .= "&min_users=" . urlencode($min_users_filter);
-                    }
-                    ?>
-                    <a href="<?php echo $print_link; ?>" class="btn btn-success" target="_blank">
-                        <i class="fas fa-file-pdf me-2"></i> CETAK PDF
-                    </a>
-                </div>
-
                 <div class="table-responsive">
                     <table class="table professional-table table-hover">
                         <thead>
@@ -212,6 +193,25 @@ $conn->close(); // Tutup koneksi database setelah mengambil data
                         </tbody>
                     </table>
                 </div>
+
+                <div class="text-end mt-3"> <?php
+                    // Bangun URL untuk print_report.php, sertakan semua filter yang relevan
+                    $print_link = "print_report.php?type=" . urlencode($report_type);
+                    if (!empty($tahun_produksi_filter)) {
+                        $print_link .= "&tahun_produksi=" . urlencode($tahun_produksi_filter);
+                    }
+                    if (!empty($genre_filter)) {
+                        $print_link .= "&genre=" . urlencode($genre_filter);
+                    }
+                    if (!empty($min_users_filter)) {
+                        $print_link .= "&min_users=" . urlencode($min_users_filter);
+                    }
+                    ?>
+                    <a href="<?php echo $print_link; ?>" class="btn btn-success" target="_blank">
+                        <i class="fas fa-file-pdf me-2"></i> CETAK PDF
+                    </a>
+                </div>
+
             </div>
         <?php else: ?>
             <div class="text-center mt-5 p-4" style="background-color: var(--bg-color-dark); border-radius: 8px;">
