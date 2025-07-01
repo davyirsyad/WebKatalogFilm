@@ -108,8 +108,7 @@ $all_genres = $conn->query("SELECT * FROM genre ORDER BY namagenre ASC");
                                 <td>
                                     <div class="d-flex gap-3 justify-content-end">
                                         <a href="?action=edit&id=<?php echo $genre['idgenre']; ?>" class="btn btn-warning btn-sm" title="Edit"><i class="fas fa-edit"></i></a>
-                                        <a href="admin_process_delete.php?type=genre&id=<?php echo $genre['idgenre']; ?>" class="btn btn-danger btn-sm" title="Hapus" onclick="return confirm('Anda yakin ingin menghapus genre \'<?php echo addslashes($genre['namagenre']); ?>\'? Film terkait akan kehilangan genre ini.')"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
+                                        <a href="admin_process_genre.php?action=delete&idgenre=<?php echo $genre['idgenre']; ?>" class="btn btn-danger btn-sm" title="Hapus" onclick="return confirm('Anda yakin ingin menghapus genre \'<?php echo addslashes($genre['namagenre']); ?>\'? Film terkait akan kehilangan genre ini.')"><i class="fas fa-trash-alt"></i></a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
