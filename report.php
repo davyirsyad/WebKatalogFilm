@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'connect.php';
+include 'connect.php'; // Pastikan path ke file koneksi database Anda benar
 
 // Fitur laporan ini seharusnya hanya bisa diakses oleh admin
 if (!isset($_SESSION['loggedin']) || ($_SESSION['userrole'] ?? 'user') !== 'admin') {
@@ -105,7 +105,7 @@ if ($is_searched) {
     <title>Laporan - Katalog Film</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <?php include 'admin_navbar.php'; ?>
@@ -162,38 +162,50 @@ if ($is_searched) {
             <div class="report-results mt-5">
                 <h2 class="report-title"><?php echo htmlspecialchars($report_title); ?></h2>
                 
-                <?php if (empty($report_data)): ?>
-                    <div class="alert alert-warning" role="alert">
-                        Tidak ada data untuk laporan ini dengan filter yang diberikan.
-                    </div>
-                <?php else: ?>
-                    <div class="table-responsive">
-                        <table class="table professional-table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Judul Film</th>
-                                    <th class="text-center">Tahun</th>
-                                    <th>Genre</th>
-                                    <th class="text-center">Jml. Interaksi</th>
-                                    <th class="text-center">Total Favorit</th>
-                                    <th class="text-center">Total Download</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($report_data as $row): ?>
+                <div class="text-end mb-3 print-button-container">
+                    <button type="button" class="btn btn-success" onclick="printPDF()">
+                        <i class="fas fa-file-pdf me-2"></i> Unduh Laporan PDF
+                    </button>
+                </div>
+
+                <div id="print-area" class="pdf-content">
+                    <h1 style="margin-bottom: 0;"><?php echo htmlspecialchars($report_title); ?></h1>
+                    <?php if ($report_type == 'film_per_tahun_produksi' && !empty($tahun_produksi_filter)): ?>
+                        <h2 style="margin-top: 5px;">Tahun Produksi: <?php echo htmlspecialchars($tahun_produksi_filter); ?></h2>
+                    <?php endif; ?>
+                    <p>Data per tanggal: <?php echo date('d M Y, H:i:s'); ?></p>
+
+                    <?php if (empty($report_data)): ?>
+                        <p class="text-center text-muted mt-4">Tidak ada data untuk laporan ini dengan filter yang diberikan.</p>
+                    <?php else: ?>
+                        <div class="table-responsive">
+                            <table class="table professional-table table-bordered table-striped">
+                                <thead>
                                     <tr>
-                                        <td class="fw-bold"><?php echo htmlspecialchars($row['judul']); ?></td>
-                                        <td class="text-center"><?php echo htmlspecialchars($row['tahunproduksi']); ?></td>
-                                        <td><?php echo htmlspecialchars($row['genres'] ?? 'N/A'); ?></td>
-                                        <td class="text-center"><?php echo htmlspecialchars($row['jumlah_pengguna_interaksi']); ?></td>
-                                        <td class="text-center"><?php echo htmlspecialchars($row['total_favorit']); ?></td>
-                                        <td class="text-center"><?php echo htmlspecialchars($row['total_download']); ?></td>
+                                        <th>Judul Film</th>
+                                        <th class="text-center">Tahun</th>
+                                        <th>Genre</th>
+                                        <th class="text-center">Jml. Interaksi</th>
+                                        <th class="text-center">Total Favorit</th>
+                                        <th class="text-center">Total Download</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                <?php endif; ?>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($report_data as $row): ?>
+                                        <tr>
+                                            <td class="fw-bold"><?php echo htmlspecialchars($row['judul']); ?></td>
+                                            <td class="text-center"><?php echo htmlspecialchars($row['tahunproduksi']); ?></td>
+                                            <td><?php echo htmlspecialchars($row['genres'] ?? 'N/A'); ?></td>
+                                            <td class="text-center"><?php echo htmlspecialchars($row['jumlah_pengguna_interaksi']); ?></td>
+                                            <td class="text-center"><?php echo htmlspecialchars($row['total_favorit']); ?></td>
+                                            <td class="text-center"><?php echo htmlspecialchars($row['total_download']); ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         <?php else: ?>
             <div class="text-center mt-5 p-4" style="background-color: var(--bg-color-dark); border-radius: 8px;">
@@ -201,6 +213,24 @@ if ($is_searched) {
             </div>
         <?php endif; ?>
     </div>
+
+    <script>
+        function printPDF() {
+            const element = document.getElementById('print-area'); // Area HTML yang akan diubah jadi PDF
+
+            const opt = {
+                margin:       [15, 15, 15, 15], // Margin: top, right, bottom, left (dalam satuan mm)
+                filename:     'Laporan_Film_<?php echo date('Ymd_His'); ?>.pdf', // Nama file PDF
+                image:        { type: 'jpeg', quality: 0.98 }, // Kualitas gambar
+                html2canvas:  { scale: 2, dpi: 192 }, // Skala rendering HTML ke kanvas, DPI
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' } // Unit, format kertas, orientasi
+            };
+
+            // Panggil html2pdf untuk mengonversi dan menyimpan
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

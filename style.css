@@ -601,3 +601,109 @@ select.btn-action option {
 .action-buttons .btn:hover {
   transform: scale(1.1); /* Tombol ikon sedikit membesar */
 }
+
+/* =================================================================
+   21. STYLE UNTUK HALAMAN LAPORAN (report.php)
+   ================================================================= */
+
+/* Container utama laporan */
+.report-filters {
+  background-color: var(--bg-color-dark);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 2.5rem;
+}
+
+/* Label filter */
+.report-filters .form-label {
+  font-size: 0.9em;
+  color: var(--text-secondary);
+}
+
+/* Hasil laporan (tabel) */
+.report-results {
+  background-color: var(--bg-color-dark);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+/* Judul laporan di bagian hasil */
+.report-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  text-align: center; /* Tambahkan ini agar judul di tengah */
+}
+
+/* Placeholder untuk input */
+.form-control::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* =================================================================
+  22. STYLE UNTUK KONTEN PDF (DIGUNAKAN OLEH html2pdf.js)
+    (Kelas ini akan ditambahkan pada div#print-area di report.php)
+   ================================================================= */
+
+.pdf-content {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px; /* Ukuran font lebih kecil untuk PDF */
+  color: #333; /* Warna teks untuk PDF */
+}
+
+.pdf-content h1,
+.pdf-content h2 {
+  text-align: center;
+  margin-bottom: 5px;
+  color: #000; /* Warna hitam penuh untuk judul di PDF */
+  font-size: 18px; /* Ukuran font judul utama di PDF */
+}
+
+.pdf-content h2 {
+  font-size: 14px;
+  font-weight: normal;
+  margin-bottom: 15px;
+}
+
+.pdf-content p {
+  text-align: center;
+  font-size: 9px;
+  margin-bottom: 15px;
+}
+
+/* Styling tabel di dalam PDF */
+.pdf-content .table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pdf-content .table th,
+.pdf-content .table td {
+  border: 1px solid #000; /* Border hitam untuk cetak */
+  padding: 6px; /* Padding lebih kecil */
+  word-wrap: break-word;
+  text-align: left;
+  font-size: 9px; /* Ukuran font sel tabel di PDF */
+}
+
+.pdf-content .table th {
+  background-color: #e0e0e0; /* Warna latar header di PDF */
+  font-weight: bold;
+}
+
+.pdf-content .table tbody tr:nth-child(even) {
+  background-color: #f5f5f5; /* Warna selang-seling di PDF */
+}
+
+/* Sembunyikan tombol cetak di halaman cetak itu sendiri (saat dicapture html2pdf) */
+.print-button-container {
+  display: none !important; /* Penting agar tidak ikut tercetak/terunduh */
+}
